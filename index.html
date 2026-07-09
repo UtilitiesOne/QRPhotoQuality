@@ -252,6 +252,14 @@
       line-height: 1.35;
     }
 
+    .locked-note {
+      display: none;
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
 
     footer {
       color: var(--muted);
@@ -265,7 +273,7 @@
   <main>
     <header>
       <h1>Field Photo Helper</h1>
-      <p class="lead">Take clean work-site photos without changing camera settings.</p>
+      <p id="helper-lead" class="lead">Take clean work-site photos without changing camera settings.</p>
     </header>
 
     <section class="panel" aria-labelledby="job-info">
@@ -282,8 +290,9 @@
           <option value="Data Centers">Data Centers</option>
           <option value="Consulting">Consulting</option>
           <option value="Fulfillment">Fulfillment</option>
-          <option value="E5">E5</option>
+          <option value="E5" data-e5-option>E5</option>
         </select>
+        <p id="locked-division-note" class="locked-note">E5 is selected for this helper link.</p>
       </div>
       <div class="field">
         <label for="location">Location / site</label>
@@ -356,6 +365,17 @@
     const SUPABASE_KEY = "sb_publishable_Q1YScoVIYYLACu-vI6T5fQ_WA-M9x_y";
     const STORAGE_BUCKET = "field-photos";
 
+    const params = new URLSearchParams(window.location.search);
+    const isE5Mode = [params.get("brand"), params.get("division"), params.get("mode")]
+      .filter(Boolean)
+      .some((value) => value.toLowerCase() === "e5");
+
+    const divisionSelect = document.getElementById("division");
+    const lockedDivisionNote = document.getElementById("locked-division-note");
+    const helperLead = document.getElementById("helper-lead");
+
+    configureDivisionMode();
+
     const input = document.getElementById("photo");
     const preview = document.getElementById("preview");
     const result = document.getElementById("result");
@@ -369,6 +389,24 @@
     let currentPhoto = null;
     let currentObjectUrl = null;
     const pendingPhotos = [];
+
+    function configureDivisionMode() {
+      const e5Option = divisionSelect.querySelector("[data-e5-option]");
+
+      if (isE5Mode) {
+        document.title = "E5 Field Photo Helper";
+        document.querySelector("h1").textContent = "E5 Field Photo Helper";
+        helperLead.textContent = "Take clean E5 project photos without changing camera settings.";
+        divisionSelect.value = "E5";
+        divisionSelect.disabled = true;
+        lockedDivisionNote.style.display = "block";
+        return;
+      }
+
+      if (e5Option) e5Option.remove();
+      divisionSelect.value = "";
+      lockedDivisionNote.style.display = "none";
+    }
 
     input.addEventListener("change", async () => {
       const file = input.files && input.files[0];
@@ -503,7 +541,7 @@
       const location = document.getElementById("location").value.trim();
 
       if (!division) {
-        showUploadStatus("Select a division or brand before submitting.", "bad");
+        showUploadStatus(isE5Mode ? "E5 should already be selected. Refresh the page and try again." : "Select a U1 division before submitting.", "bad");
         return;
       }
 

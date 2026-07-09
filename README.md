@@ -5,12 +5,15 @@ Static field photo helper for UtilitiesOne foremen and field technicians.
 ## Files
 
 - `index.html`: phone-first photo helper.
-- `flyer.html`: print-ready handout source. Field crews should use the QR on the printed flyer, not the online flyer page.
+- `flyer.html`: U1 print-ready pocket flyer source.
+- `flyer-print.pdf`: U1 printable pocket flyer PDF.
+- `flyer-e5.html`: E5 print-ready pocket flyer source.
+- `flyer-e5-print.pdf`: E5 printable pocket flyer PDF.
 - `gallery.html`: marketing-facing photo gallery.
-- `qr-config.json`: QR destination config.
+- `qr-config.json`: U1 and E5 QR destination config.
 - `make_assets.py`: regenerates the QR assets.
-- `assets/field-photo-helper-qr.svg`: QR used in the flyer.
-- `assets/field-photo-helper-qr.png`: PNG QR backup.
+- `assets/field-photo-helper-u1-qr.svg`: U1 QR used in the U1 flyer.
+- `assets/field-photo-helper-e5-qr.svg`: E5 QR used in the E5 flyer.
 
 ## How it works
 
@@ -20,17 +23,25 @@ The printed flyer avoids asking crews to change camera settings. The QR opens th
 - Low light
 - Blur
 
-The helper asks for the division or brand, location, and photo type. It checks photo quality, queues photos, and submits them to Supabase Storage for the marketing team.
+The U1 helper asks for the U1 division, location, and photo type. The E5 helper locks the division to E5 so E5 foremen and technicians do not need to choose from the U1 division list. Both helpers check photo quality, queue photos, and submit them to the same Supabase Storage bucket and metadata table for the marketing team.
 
 ## Live URL
 
-After GitHub Pages deploys, the helper should be available at:
+After GitHub Pages deploys, the U1 helper should be available at:
 
 `https://utilitiesone.github.io/QRPhotoQuality/`
 
-The printable flyer source is available at:
+The E5 helper should be available at:
 
-`https://utilitiesone.github.io/QRPhotoQuality/flyer.html`
+`https://utilitiesone.github.io/QRPhotoQuality/e5.html`
+
+The U1 printable flyer PDF is available at:
+
+`https://utilitiesone.github.io/QRPhotoQuality/flyer-print.pdf`
+
+The E5 printable flyer PDF is available at:
+
+`https://utilitiesone.github.io/QRPhotoQuality/flyer-e5-print.pdf`
 
 The marketing gallery is available at:
 

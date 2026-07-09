@@ -9,17 +9,29 @@ CONFIG = ROOT / "qr-config.json"
 ASSETS = ROOT / "assets"
 
 
+QR_TARGETS = {
+    "u1_helper_url": ["field-photo-helper-qr", "field-photo-helper-u1-qr"],
+    "e5_helper_url": ["field-photo-helper-e5-qr"],
+}
+
+
+def save_qr(url: str, stem: str) -> None:
+    qr = segno.make(url, error="h")
+    qr.save(ASSETS / f"{stem}.svg", scale=9, border=2, dark="#101820", light="#ffffff")
+    qr.save(ASSETS / f"{stem}.png", scale=9, border=2, dark="#101820", light="#ffffff")
+    print(f"QR generated for {stem}: {url}")
+
+
 def main() -> None:
     config = json.loads(CONFIG.read_text(encoding="utf-8"))
-    helper_url = config["helper_url"].strip()
-    if not helper_url:
-        raise SystemExit("qr-config.json helper_url is empty")
-
     ASSETS.mkdir(exist_ok=True)
-    qr = segno.make(helper_url, error="h")
-    qr.save(ASSETS / "field-photo-helper-qr.svg", scale=9, border=2, dark="#101820", light="#ffffff")
-    qr.save(ASSETS / "field-photo-helper-qr.png", scale=9, border=2, dark="#101820", light="#ffffff")
-    print(f"QR generated for: {helper_url}")
+
+    for key, stems in QR_TARGETS.items():
+        helper_url = config[key].strip()
+        if not helper_url:
+            raise SystemExit(f"qr-config.json {key} is empty")
+        for stem in stems:
+            save_qr(helper_url, stem)
 
 
 if __name__ == "__main__":
