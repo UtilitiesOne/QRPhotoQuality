@@ -19,7 +19,7 @@ The flyer avoids asking crews to change camera settings. The QR opens a simple p
 - Low light
 - Blur
 
-The helper does not upload photos. It asks for the division or brand, checks photo quality, and gives a save/share action so the workflow can be connected later to the company's normal marketing, campaign, or social content process.
+The helper asks for the division or brand, location, and photo type. It checks photo quality, queues photos, and submits them to Supabase Storage for the marketing team.
 
 ## Live URL
 
@@ -37,10 +37,21 @@ The flyer is available at:
 2. Run `python make_assets.py`.
 3. Commit the regenerated files under `assets/`.
 
+## Supabase setup
+
+Run `supabase-setup.sql` in the Supabase SQL Editor before using the submit button. It creates:
+
+- Storage bucket: `field-photos`
+- Metadata table: `photo_submissions`
+- Public insert policy for photo uploads
+- Public insert policy for metadata rows
+
+The public helper uses the Supabase publishable key. Do not put a secret key in this repository.
+
 ## Field rule
 
-Every job should have at least three usable photos:
+Every site should have at least three usable marketing photos:
 
-1. Wide: full site context.
-2. Medium: actual work area.
-3. Close-up: finished detail, label, damage, connection, or issue.
+1. Wide: full site context, crew scale, equipment, and surroundings.
+2. Medium: crew, equipment, materials, or active work from a useful angle.
+3. Close-up: a clean detail that makes the work look professional and easy to understand.
