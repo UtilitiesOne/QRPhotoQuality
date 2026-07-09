@@ -70,7 +70,8 @@
       font-size: 14px;
     }
 
-    input[type="text"] {
+    input[type="text"],
+    select {
       width: 100%;
       min-height: 46px;
       padding: 10px 12px;
@@ -256,8 +257,19 @@
     <section class="panel" aria-labelledby="job-info">
       <h2 id="job-info">Site info</h2>
       <div class="field">
-        <label for="job">Project / ticket number</label>
-        <input id="job" type="text" autocomplete="off" inputmode="text" placeholder="Example: 2407-118">
+        <label for="division">Division / brand</label>
+        <select id="division" autocomplete="off">
+          <option value="" selected>Select division or brand</option>
+          <option value="Power Delivery">Power Delivery</option>
+          <option value="Water">Water</option>
+          <option value="Renewable">Renewable</option>
+          <option value="Wireline">Wireline</option>
+          <option value="Wireless">Wireless</option>
+          <option value="Data Centers">Data Centers</option>
+          <option value="Consulting">Consulting</option>
+          <option value="Fulfillment">Fulfillment</option>
+          <option value="E5">E5</option>
+        </select>
       </div>
       <div class="field">
         <label for="location">Location / site</label>
@@ -445,11 +457,11 @@
     }
 
     function buildFileName(file) {
-      const job = cleanName(document.getElementById("job").value || "job");
+      const division = cleanName(document.getElementById("division").value || "division");
       const location = cleanName(document.getElementById("location").value || "site");
       const stamp = new Date().toISOString().replace(/[:.]/g, "-");
       const extension = (file.name.split(".").pop() || "jpg").toLowerCase();
-      return `${job}_${location}_${stamp}.${extension}`;
+      return `${division}_${location}_${stamp}.${extension}`;
     }
 
     function cleanName(value) {

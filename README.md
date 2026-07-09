@@ -19,7 +19,7 @@ The flyer avoids asking crews to change camera settings. The QR opens a simple p
 - Low light
 - Blur
 
-The helper does not upload photos. It gives a save/share action so the workflow can be connected later to the company's normal marketing, campaign, or social content process.
+The helper does not upload photos. It asks for the division or brand, checks photo quality, and gives a save/share action so the workflow can be connected later to the company's normal marketing, campaign, or social content process.
 
 ## Live URL
 
