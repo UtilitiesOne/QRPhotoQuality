@@ -254,9 +254,9 @@
     </header>
 
     <section class="panel" aria-labelledby="job-info">
-      <h2 id="job-info">Job info</h2>
+      <h2 id="job-info">Site info</h2>
       <div class="field">
-        <label for="job">Job / ticket number</label>
+        <label for="job">Project / ticket number</label>
         <input id="job" type="text" autocomplete="off" inputmode="text" placeholder="Example: 2407-118">
       </div>
       <div class="field">
@@ -272,21 +272,21 @@
           <span class="num">1</span>
           <span>
             <span class="shot-title">Wide</span>
-            <span class="shot-copy">Show the full work area and where the job is located.</span>
+            <span class="shot-copy">Show the full site context, crew scale, equipment, and surroundings.</span>
           </span>
         </li>
         <li>
           <span class="num">2</span>
           <span>
             <span class="shot-title">Medium</span>
-            <span class="shot-copy">Show the equipment, access point, trench, pole, cabinet, or marked work area.</span>
+            <span class="shot-copy">Show the crew, equipment, materials, or active work from a clear useful angle.</span>
           </span>
         </li>
         <li>
           <span class="num">3</span>
           <span>
             <span class="shot-title">Close-up</span>
-            <span class="shot-copy">Show the finished detail, label, damage, connection, or issue.</span>
+            <span class="shot-copy">Show a clean detail that makes the work look professional and easy to understand.</span>
           </span>
         </li>
       </ul>
@@ -309,9 +309,9 @@
       <h2 id="quick-check">Before you leave</h2>
       <ul class="checklist">
         <li><label><input type="checkbox"> Wide photo shows the full site context.</label></li>
-        <li><label><input type="checkbox"> Medium photo shows the actual work area.</label></li>
-        <li><label><input type="checkbox"> Close-up is sharp enough to read labels or see detail.</label></li>
-        <li><label><input type="checkbox"> Photo is not dark, blurry, or blocked by fingers, glare, tools, or truck windows.</label></li>
+        <li><label><input type="checkbox"> Medium photo shows the crew, equipment, materials, or active work.</label></li>
+        <li><label><input type="checkbox"> Close-up is sharp enough to use in a campaign, LinkedIn post, or project story.</label></li>
+        <li><label><input type="checkbox"> Photo is not dark, blurry, tilted, cluttered, or blocked by fingers, glare, tools, or truck windows.</label></li>
       </ul>
     </section>
 
@@ -394,8 +394,8 @@
 
       const issues = [];
       if (megapixels < 2) issues.push("Resolution looks low. Retake from the camera, not a screenshot or compressed image.");
-      if (brightness < 70 || darkShare > 0.42) issues.push("Photo looks too dark. Move closer, face the work area, and avoid shooting into the sun.");
-      if (sharpness < 85) issues.push("Photo may be blurry. Hold still, tap the work area on screen, and retake.");
+      if (brightness < 70 || darkShare > 0.42) issues.push("Photo looks too dark. Move closer, face the main subject, and avoid shooting into the sun.");
+      if (sharpness < 85) issues.push("Photo may be blurry. Hold still, tap the main subject on screen, and retake.");
 
       return { brightness, darkShare, sharpness, megapixels, issues };
     }
