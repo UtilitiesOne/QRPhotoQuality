@@ -254,9 +254,25 @@
       line-height: 1.25;
     }
 
+    @page {
+      size: Letter;
+      margin: 0;
+    }
+
     @media print {
       body { background: #fff; }
-      .page { margin: 0; width: auto; min-height: auto; }
+      .page {
+        margin: 0;
+        width: 8.5in;
+        min-height: 0;
+        height: 11in;
+        padding: 0.34in;
+      }
+      header { padding-bottom: 0.2in; }
+      .steps { margin: 0.22in 0; }
+      .step { padding: 0.14in; min-height: 1.34in; }
+      .warning { margin-top: 0.18in; padding: 0.15in 0.18in; }
+      footer { margin-top: 0.14in; padding-top: 0.1in; }
     }
   </style>
 </head>
