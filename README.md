@@ -6,6 +6,7 @@ Static field photo helper for UtilitiesOne foremen and field technicians.
 
 - `index.html`: phone-first photo helper.
 - `flyer.html`: print-ready handout for foremen and technicians.
+- `gallery.html`: marketing-facing photo gallery.
 - `qr-config.json`: QR destination config.
 - `make_assets.py`: regenerates the QR assets.
 - `assets/field-photo-helper-qr.svg`: QR used in the flyer.
@@ -31,6 +32,10 @@ The flyer is available at:
 
 `https://utilitiesone.github.io/QRPhotoQuality/flyer.html`
 
+The marketing gallery is available at:
+
+`https://utilitiesone.github.io/QRPhotoQuality/gallery.html`
+
 ## Updating the QR
 
 1. Edit `qr-config.json`.
@@ -46,7 +51,9 @@ Run `supabase-setup.sql` in the Supabase SQL Editor before using the submit butt
 - Public insert policy for photo uploads
 - Public insert policy for metadata rows
 
-The public helper uses the Supabase publishable key. Do not put a secret key in this repository.
+Run `supabase-gallery-access.sql` after `supabase-setup.sql` if the marketing gallery should read submitted photos without opening Supabase directly. It adds read policies for metadata and signed image links.
+
+The public helper and gallery use the Supabase publishable key. Do not put a secret key in this repository.
 
 ## Field rule
 

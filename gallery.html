@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101820">
+  <title>Marketing Photo Gallery</title>
+  <style>
+    :root {
+      --ink: #101820;
+      --muted: #5d6673;
+      --line: #d9dee5;
+      --paper: #f6f8fb;
+      --white: #ffffff;
+      --blue: #155eef;
+      --good: #16794f;
+      --warn: #9a5b00;
+      --bad: #b42318;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+    }
+
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 18px 0 12px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    .top-link {
+      display: inline-grid;
+      place-items: center;
+      min-height: 42px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--ink);
+      background: var(--white);
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .panel {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 14px 0;
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(140px, 1fr));
+      gap: 10px;
+      align-items: end;
+    }
+
+    label {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    select,
+    input[type="date"],
+    input[type="search"] {
+      width: 100%;
+      min-height: 42px;
+      border: 1px solid #b9c1cd;
+      border-radius: 6px;
+      padding: 9px 10px;
+      font-size: 15px;
+      color: var(--ink);
+      background: var(--white);
+    }
+
+    button {
+      min-height: 42px;
+      border: 0;
+      border-radius: 6px;
+      padding: 10px 14px;
+      background: var(--blue);
+      color: var(--white);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .status {
+      display: none;
+      margin-top: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fbfcfe;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .status.bad {
+      display: block;
+      color: var(--bad);
+      background: #fff1f0;
+      border-color: #f1a8a1;
+    }
+
+    .status.good {
+      display: block;
+      color: var(--good);
+      background: #effaf4;
+      border-color: #81c7a5;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+    }
+
+    .thumb {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+      background: #e9edf3;
+    }
+
+    .body {
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+    }
+
+    .meta {
+      display: grid;
+      gap: 4px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    .title {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.2;
+    }
+
+    .badge {
+      display: inline-block;
+      width: fit-content;
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 12px;
+      font-weight: 700;
+      background: #effaf4;
+      color: var(--good);
+    }
+
+    .badge.warn {
+      color: var(--warn);
+      background: #fff7e6;
+    }
+
+    .card-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .card-actions a {
+      display: inline-grid;
+      place-items: center;
+      min-height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--ink);
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .empty {
+      padding: 24px;
+      border: 1px dashed #b9c1cd;
+      border-radius: 8px;
+      color: var(--muted);
+      background: var(--white);
+      text-align: center;
+    }
+
+    @media (max-width: 760px) {
+      header { display: grid; }
+      .filters { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1>Marketing Photo Gallery</h1>
+        <p class="lead">Review submitted field photos by division, site, type, and date.</p>
+      </div>
+      <a class="top-link" href="./">Open photo helper</a>
+    </header>
+
+    <section class="panel" aria-label="Gallery filters">
+      <div class="filters">
+        <label>
+          Division / brand
+          <select id="division">
+            <option value="">All divisions</option>
+            <option value="Power Delivery">Power Delivery</option>
+            <option value="Water">Water</option>
+            <option value="Renewable">Renewable</option>
+            <option value="Wireline">Wireline</option>
+            <option value="Wireless">Wireless</option>
+            <option value="Data Centers">Data Centers</option>
+            <option value="Consulting">Consulting</option>
+            <option value="Fulfillment">Fulfillment</option>
+            <option value="E5">E5</option>
+          </select>
+        </label>
+        <label>
+          Photo type
+          <select id="photo-type">
+            <option value="">All types</option>
+            <option value="Wide">Wide</option>
+            <option value="Medium">Medium</option>
+            <option value="Close-up">Close-up</option>
+            <option value="Other">Other</option>
+          </select>
+        </label>
+        <label>
+          From
+          <input id="date-from" type="date">
+        </label>
+        <label>
+          Search site
+          <input id="site-search" type="search" placeholder="Location or site">
+        </label>
+        <button id="refresh" type="button">Refresh</button>
+      </div>
+      <div id="status" class="status" role="status" aria-live="polite"></div>
+    </section>
+
+    <section id="gallery" class="gallery" aria-label="Submitted photos"></section>
+  </main>
+
+  <script>
+    const SUPABASE_URL = "https://zrvoejuicneeowfijxvf.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_Q1YScoVIYYLACu-vI6T5fQ_WA-M9x_y";
+    const STORAGE_BUCKET = "field-photos";
+
+    const gallery = document.getElementById("gallery");
+    const statusBox = document.getElementById("status");
+    const refresh = document.getElementById("refresh");
+    const division = document.getElementById("division");
+    const photoType = document.getElementById("photo-type");
+    const dateFrom = document.getElementById("date-from");
+    const siteSearch = document.getElementById("site-search");
+
+    refresh.addEventListener("click", loadGallery);
+    division.addEventListener("change", loadGallery);
+    photoType.addEventListener("change", loadGallery);
+    dateFrom.addEventListener("change", loadGallery);
+    siteSearch.addEventListener("search", loadGallery);
+
+    loadGallery();
+
+    async function loadGallery() {
+      showStatus("Loading submitted photos...", "");
+      gallery.innerHTML = "";
+
+      try {
+        const rows = await fetchSubmissions();
+        const filtered = applyClientFilters(rows);
+        const cards = await Promise.all(filtered.map(buildCard));
+
+        if (cards.length === 0) {
+          gallery.innerHTML = `<div class="empty">No submitted photos match these filters.</div>`;
+          showStatus("No photos found for the current filters.", "");
+          return;
+        }
+
+        gallery.innerHTML = cards.join("");
+        showStatus(`${cards.length} photo${cards.length === 1 ? "" : "s"} loaded.`, "good");
+      } catch (error) {
+        gallery.innerHTML = "";
+        showStatus(`Gallery failed to load: ${error.message}`, "bad");
+      }
+    }
+
+    async function fetchSubmissions() {
+      const params = new URLSearchParams();
+      params.set("select", "id,created_at,division,location,photo_type,storage_path,file_name,quality_status,quality_issues,megapixels,brightness_score,sharpness_score");
+      params.set("order", "created_at.desc");
+      params.set("limit", "200");
+
+      if (division.value) params.set("division", `eq.${division.value}`);
+      if (photoType.value) params.set("photo_type", `eq.${photoType.value}`);
+      if (dateFrom.value) params.set("created_at", `gte.${dateFrom.value}T00:00:00Z`);
+
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/photo_submissions?${params.toString()}`, {
+        headers: { "apikey": SUPABASE_KEY }
+      });
+
+      if (!response.ok) {
+        const detail = await response.text();
+        throw new Error(detail || `Metadata request failed with ${response.status}`);
+      }
+
+      return response.json();
+    }
+
+    function applyClientFilters(rows) {
+      const term = siteSearch.value.trim().toLowerCase();
+      if (!term) return rows;
+      return rows.filter((row) => String(row.location || "").toLowerCase().includes(term));
+    }
+
+    async function buildCard(row) {
+      const imageUrl = await createSignedUrl(row.storage_path);
+      const date = new Date(row.created_at).toLocaleString([], {
+        year: "numeric",
+        month: "short",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+      const status = row.quality_status === "good" ? "Good" : "Retake recommended";
+      const badgeClass = row.quality_status === "good" ? "badge" : "badge warn";
+      const issues = Array.isArray(row.quality_issues) && row.quality_issues.length > 0
+        ? row.quality_issues.join(" ")
+        : "No quality issues flagged.";
+
+      return `
+        <article class="card">
+          <img class="thumb" src="${escapeAttr(imageUrl)}" alt="${escapeAttr(row.photo_type)} photo from ${escapeAttr(row.location)}">
+          <div class="body">
+            <h2 class="title">${escapeHtml(row.division)} · ${escapeHtml(row.photo_type)}</h2>
+            <span class="${badgeClass}">${status}</span>
+            <div class="meta">
+              <span>${escapeHtml(row.location)}</span>
+              <span>${date}</span>
+              <span>${Number(row.megapixels || 0).toFixed(1)} MP · sharpness ${row.sharpness_score ?? "n/a"} · light ${row.brightness_score ?? "n/a"}</span>
+              <span>${escapeHtml(issues)}</span>
+            </div>
+            <div class="card-actions">
+              <a href="${escapeAttr(imageUrl)}" target="_blank" rel="noopener">Open</a>
+              <a href="${escapeAttr(imageUrl)}" download="${escapeAttr(row.file_name || "field-photo")}">Download</a>
+            </div>
+          </div>
+        </article>`;
+    }
+
+    async function createSignedUrl(path) {
+      const response = await fetch(`${SUPABASE_URL}/storage/v1/object/sign/${STORAGE_BUCKET}/${encodePath(path)}`, {
+        method: "POST",
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ expiresIn: 3600 })
+      });
+
+      if (!response.ok) {
+        const detail = await response.text();
+        throw new Error(detail || `Image link request failed with ${response.status}`);
+      }
+
+      const payload = await response.json();
+      if (!payload.signedURL) throw new Error("Supabase did not return a signed image URL.");
+      return payload.signedURL.startsWith("http") ? payload.signedURL : `${SUPABASE_URL}${payload.signedURL}`;
+    }
+
+    function encodePath(path) {
+      return String(path).split("/").map(encodeURIComponent).join("/");
+    }
+
+    function showStatus(message, state) {
+      statusBox.textContent = message;
+      statusBox.className = `status ${state || ""}`.trim();
+      statusBox.style.display = "block";
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"]/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;"
+      }[char]));
+    }
+
+    function escapeAttr(value) {
+      return escapeHtml(value).replace(/'/g, "&#39;");
+    }
+  </script>
+</body>
+</html>
