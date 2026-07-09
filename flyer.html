@@ -27,17 +27,26 @@
       width: 4in;
       min-height: 6in;
       margin: 0 auto;
-      padding: 0.16in;
+      padding: 0.14in;
       background: var(--paper);
       display: flex;
       flex-direction: column;
-      gap: 0.08in;
+      gap: 0.07in;
+    }
+
+    .top {
+      display: grid;
+      grid-template-columns: 1fr 1.9in;
+      gap: 0.1in;
+      align-items: start;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 0.08in;
     }
 
     .eyebrow {
       margin: 0;
       color: var(--blue);
-      font-size: 11px;
+      font-size: 9px;
       font-weight: 700;
       letter-spacing: 0;
       text-transform: uppercase;
@@ -45,86 +54,123 @@
 
     h1 {
       margin: 0.03in 0 0;
-      font-size: 24px;
-      line-height: 1;
+      font-size: 19px;
+      line-height: 1.02;
       letter-spacing: 0;
     }
 
     .subhead {
       margin: 0.05in 0 0;
       color: var(--muted);
-      font-size: 13px;
-      line-height: 1.25;
+      font-size: 10px;
+      line-height: 1.18;
     }
 
     .qr-box {
-      border: 3px solid var(--ink);
+      border: 2px solid var(--ink);
       border-radius: 8px;
-      padding: 0.1in;
+      padding: 0.07in;
       text-align: center;
     }
 
     .qr-box img {
       display: block;
-      width: 2.5in;
-      height: 2.5in;
-      margin: 0 auto 0.05in;
+      width: 1.68in;
+      height: 1.68in;
+      margin: 0 auto 0.04in;
     }
 
     .qr-box strong {
       display: block;
-      font-size: 15px;
-      line-height: 1.12;
+      font-size: 10px;
+      line-height: 1.1;
     }
 
-    .shots {
+    .section-title {
+      margin: 0 0 0.05in;
+      font-size: 13px;
+      line-height: 1;
+    }
+
+    .steps {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 0.07in;
+      gap: 0.06in;
     }
 
-    .shot {
+    .step,
+    .shot,
+    .rule li {
       border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 0.06in;
+      border-radius: 7px;
       background: var(--soft);
-      text-align: center;
-      min-height: 0.48in;
     }
 
-    .shot span {
-      display: block;
-      color: var(--blue);
+    .step {
+      padding: 0.06in;
+      min-height: 0.72in;
+    }
+
+    .num {
+      display: inline-grid;
+      place-items: center;
+      width: 0.18in;
+      height: 0.18in;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
       font-size: 9px;
       font-weight: 700;
       line-height: 1;
     }
 
+    .step strong,
     .shot strong {
       display: block;
       margin-top: 0.04in;
-      font-size: 13px;
-      line-height: 1;
+      font-size: 10px;
+      line-height: 1.05;
+    }
+
+    .step span,
+    .shot span {
+      display: block;
+      margin-top: 0.03in;
+      color: var(--muted);
+      font-size: 8.5px;
+      line-height: 1.1;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.06in;
+    }
+
+    .shot {
+      padding: 0.06in;
+      min-height: 0.7in;
     }
 
     .rule {
-      border-top: 2px solid var(--ink);
-      padding-top: 0.07in;
-      font-size: 13px;
-      line-height: 1.22;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 0.04in;
     }
 
-    .rule strong {
-      display: block;
-      margin-bottom: 0.04in;
-      font-size: 15px;
+    .rule li {
+      padding: 0.055in 0.07in;
+      font-size: 9.5px;
+      line-height: 1.15;
     }
 
     footer {
       margin-top: auto;
       color: var(--muted);
-      font-size: 9px;
-      line-height: 1.2;
+      font-size: 8.5px;
+      line-height: 1.15;
     }
 
     @page {
@@ -145,31 +191,46 @@
 </head>
 <body>
   <main class="page">
-    <header>
-      <p class="eyebrow">Field photo helper</p>
-      <h1>Scan before taking<br>project photos.</h1>
-      <p class="subhead">No camera settings. The helper checks photo quality before you submit.</p>
-    </header>
-
-    <section class="qr-box" aria-label="QR code for field photo helper">
-      <img src="assets/field-photo-helper-qr.svg" alt="QR code for field photo helper">
-      <strong>Open the photo helper</strong>
+    <section class="top">
+      <div>
+        <p class="eyebrow">Field photo helper</p>
+        <h1>Take better photos.</h1>
+        <p class="subhead">Scan first. It checks blur, light, and resolution.</p>
+      </div>
+      <div class="qr-box" aria-label="QR code for field photo helper">
+        <img src="assets/field-photo-helper-qr.svg" alt="QR code for field photo helper">
+        <strong>Scan to open</strong>
+      </div>
     </section>
 
-    <section class="shots" aria-label="Required photo types">
-      <div class="shot"><span>1</span><strong>Wide</strong></div>
-      <div class="shot"><span>2</span><strong>Medium</strong></div>
-      <div class="shot"><span>3</span><strong>Close-up</strong></div>
+    <section aria-label="Simple photo process">
+      <h2 class="section-title">Before each photo</h2>
+      <div class="steps">
+        <div class="step"><b class="num">1</b><strong>Wipe lens</strong><span>Clean dust, rain, fingerprints.</span></div>
+        <div class="step"><b class="num">2</b><strong>Stand still</strong><span>Hold with both hands. Tap subject.</span></div>
+        <div class="step"><b class="num">3</b><strong>Take 3 shots</strong><span>Wide, medium, close-up.</span></div>
+      </div>
     </section>
 
-    <section class="rule">
-      <strong>Retake if it is blurry, dark, or cut off.</strong>
-      One clear photo on site is faster than fixing a bad one later.
+    <section aria-label="Required photos">
+      <h2 class="section-title">The 3 photos we need</h2>
+      <div class="photo-grid">
+        <div class="shot"><strong>Wide</strong><span>Full site, crew, equipment, surroundings.</span></div>
+        <div class="shot"><strong>Medium</strong><span>Crew, materials, equipment, active work.</span></div>
+        <div class="shot"><strong>Close-up</strong><span>Clean detail that explains the work.</span></div>
+      </div>
     </section>
 
-    <footer>
-      Use it before submitting project photos.
-    </footer>
+    <section aria-label="Retake rules">
+      <h2 class="section-title">Retake the photo if</h2>
+      <ul class="rule">
+        <li>It is blurry, too dark, or taken through a dirty window.</li>
+        <li>The subject is cut off, blocked, too close, or hard to understand.</li>
+        <li>It does not clearly show people, equipment, work, or finished result.</li>
+      </ul>
+    </section>
+
+    <footer>Use it before submitting project photos.</footer>
   </main>
 </body>
 </html>
