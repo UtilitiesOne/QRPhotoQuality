@@ -411,8 +411,11 @@
       }
 
       const payload = await response.json();
-      if (!payload.signedURL) throw new Error("Supabase did not return a signed image URL.");
-      return payload.signedURL.startsWith("http") ? payload.signedURL : `${SUPABASE_URL}${payload.signedURL}`;
+      const signedUrl = payload.signedURL || payload.signedUrl;
+      if (!signedUrl) throw new Error("Supabase did not return a signed image URL.");
+      if (signedUrl.startsWith("http")) return signedUrl;
+      if (signedUrl.startsWith("/storage/v1/")) return `${SUPABASE_URL}${signedUrl}`;
+      return `${SUPABASE_URL}/storage/v1${signedUrl}`;
     }
 
     function encodePath(path) {
