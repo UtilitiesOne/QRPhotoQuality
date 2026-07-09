@@ -41,7 +41,7 @@ The flyer is available at:
 
 Run `supabase-setup.sql` in the Supabase SQL Editor before using the submit button. It creates:
 
-- Storage bucket: `field-photos`
+- Storage bucket: `field-photos`, organized as `division/location/photo-type/file`
 - Metadata table: `photo_submissions`
 - Public insert policy for photo uploads
 - Public insert policy for metadata rows

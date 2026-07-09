@@ -633,7 +633,7 @@
       const type = cleanName(photoType || "photo");
       const stamp = new Date().toISOString().replace(/[:.]/g, "-");
       const extension = (file.name.split(".").pop() || "jpg").toLowerCase();
-      return `${division}/${location}/${stamp}_${sequence}_${type}.${extension}`;
+      return `${division}/${location}/${type}/${stamp}_${sequence}.${extension}`;
     }
 
     function buildFileName(file, photoType) {
