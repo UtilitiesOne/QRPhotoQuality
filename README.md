@@ -5,7 +5,7 @@ Static field photo helper for UtilitiesOne foremen and field technicians.
 ## Files
 
 - `index.html`: phone-first photo helper.
-- `flyer.html`: print-ready handout for foremen and technicians.
+- `flyer.html`: print-ready handout source. Field crews should use the QR on the printed flyer, not the online flyer page.
 - `gallery.html`: marketing-facing photo gallery.
 - `qr-config.json`: QR destination config.
 - `make_assets.py`: regenerates the QR assets.
@@ -14,7 +14,7 @@ Static field photo helper for UtilitiesOne foremen and field technicians.
 
 ## How it works
 
-The flyer avoids asking crews to change camera settings. The QR opens a simple photo helper. The helper uses the phone's native camera capture flow, then checks the selected photo for three common failure points:
+The printed flyer avoids asking crews to change camera settings. The QR opens the photo helper directly. The helper uses the phone's native camera capture flow, then checks the selected photo for three common failure points:
 
 - Low resolution
 - Low light
@@ -28,7 +28,7 @@ After GitHub Pages deploys, the helper should be available at:
 
 `https://utilitiesone.github.io/QRPhotoQuality/`
 
-The flyer is available at:
+The printable flyer source is available at:
 
 `https://utilitiesone.github.io/QRPhotoQuality/flyer.html`
 
