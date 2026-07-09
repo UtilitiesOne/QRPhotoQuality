@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Field Photo Standard Flyer</title>
+  <style>
+    :root {
+      --ink: #101820;
+      --muted: #56616f;
+      --line: #d7dde6;
+      --blue: #155eef;
+      --green: #16794f;
+      --paper: #ffffff;
+      --soft: #f3f6fa;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #e8edf4;
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .page {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 0 auto;
+      padding: 0.42in;
+      background: var(--paper);
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: 1fr 2.05in;
+      gap: 0.28in;
+      align-items: start;
+      border-bottom: 3px solid var(--ink);
+      padding-bottom: 0.24in;
+    }
+
+    .eyebrow {
+      margin: 0 0 0.08in;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 42px;
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .subhead {
+      margin: 0.16in 0 0;
+      font-size: 18px;
+      line-height: 1.28;
+      color: var(--muted);
+      max-width: 5.15in;
+    }
+
+    .qr-box {
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      padding: 0.13in;
+      text-align: center;
+    }
+
+    .qr-box img {
+      display: block;
+      width: 1.72in;
+      height: 1.72in;
+      margin: 0 auto 0.08in;
+    }
+
+    .qr-box strong {
+      display: block;
+      font-size: 14px;
+      line-height: 1.15;
+    }
+
+    .qr-box span {
+      display: block;
+      margin-top: 0.04in;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.2;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.16in;
+      margin: 0.28in 0;
+    }
+
+    .step {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.17in;
+      min-height: 1.43in;
+    }
+
+    .step-number {
+      display: inline-grid;
+      place-items: center;
+      width: 0.34in;
+      height: 0.34in;
+      border-radius: 50%;
+      background: var(--ink);
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 0.1in;
+    }
+
+    .step h2 {
+      margin: 0 0 0.06in;
+      font-size: 21px;
+      line-height: 1.05;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.3;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.22in;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.18in;
+      background: var(--soft);
+    }
+
+    .panel h2 {
+      margin: 0 0 0.12in;
+      font-size: 24px;
+      line-height: 1.05;
+    }
+
+    .shot {
+      display: grid;
+      grid-template-columns: 0.38in 1fr;
+      gap: 0.12in;
+      padding: 0.11in 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .shot:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .shot-mark {
+      display: inline-grid;
+      place-items: center;
+      width: 0.34in;
+      height: 0.34in;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .shot strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 0.03in;
+    }
+
+    .shot span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.28;
+    }
+
+    .rules {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 0.1in;
+    }
+
+    .rules li {
+      display: grid;
+      grid-template-columns: 0.22in 1fr;
+      gap: 0.08in;
+      font-size: 15px;
+      line-height: 1.28;
+    }
+
+    .rules li::before {
+      content: "";
+      width: 0.13in;
+      height: 0.13in;
+      margin-top: 0.04in;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    .warning {
+      margin-top: 0.24in;
+      border: 2px solid var(--blue);
+      border-radius: 8px;
+      padding: 0.18in 0.2in;
+      display: grid;
+      grid-template-columns: 1fr 1.5in;
+      gap: 0.2in;
+      align-items: center;
+    }
+
+    .warning h2 {
+      margin: 0 0 0.05in;
+      font-size: 23px;
+    }
+
+    .warning p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.3;
+    }
+
+    .pass {
+      text-align: center;
+      padding: 0.12in;
+      border-radius: 8px;
+      background: var(--soft);
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    footer {
+      margin-top: 0.22in;
+      padding-top: 0.14in;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.25;
+    }
+
+    @media print {
+      body { background: #fff; }
+      .page { margin: 0; width: auto; min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <div>
+        <p class="eyebrow">Field photo standard</p>
+        <h1>Take photos the office can actually use.</h1>
+        <p class="subhead">No camera settings to change. Scan the code, take the required shots, and retake anything the photo check flags.</p>
+      </div>
+      <div class="qr-box">
+        <img src="assets/field-photo-helper-qr.svg" alt="QR code for field photo helper">
+        <strong>Scan before taking site photos</strong>
+        <span>Opens the field photo helper</span>
+      </div>
+    </header>
+
+    <section class="steps" aria-label="Simple field photo process">
+      <div class="step">
+        <span class="step-number">1</span>
+        <h2>Wipe the lens</h2>
+        <p>Dust, rain, fingerprints, and truck windows ruin photos before the work is even in frame.</p>
+      </div>
+      <div class="step">
+        <span class="step-number">2</span>
+        <h2>Stand still</h2>
+        <p>Hold the phone with both hands. Tap the work area on screen before taking the photo.</p>
+      </div>
+      <div class="step">
+        <span class="step-number">3</span>
+        <h2>Take 3 shots</h2>
+        <p>Wide, medium, close-up. The helper checks for blur, low light, and low resolution.</p>
+      </div>
+    </section>
+
+    <section class="main-grid">
+      <div class="panel">
+        <h2>The 3 photos we need</h2>
+        <div class="shot">
+          <span class="shot-mark">1</span>
+          <div>
+            <strong>Wide</strong>
+            <span>Show the full work area, surroundings, and where the job sits on site.</span>
+          </div>
+        </div>
+        <div class="shot">
+          <span class="shot-mark">2</span>
+          <div>
+            <strong>Medium</strong>
+            <span>Show the equipment, pole, cabinet, trench, access point, or marked work area.</span>
+          </div>
+        </div>
+        <div class="shot">
+          <span class="shot-mark">3</span>
+          <div>
+            <strong>Close-up</strong>
+            <span>Show the finished detail, label, connection, damage, obstruction, or issue.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Retake the photo if</h2>
+        <ul class="rules">
+          <li>It is blurry when you zoom in.</li>
+          <li>It is too dark to see the work clearly.</li>
+          <li>The photo was taken through a dirty windshield or window.</li>
+          <li>The work area is cut off or too close to understand.</li>
+          <li>Fingers, tools, glare, or equipment block the view.</li>
+          <li>Labels, markings, or damage cannot be read.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="warning">
+      <div>
+        <h2>Simple rule: if the office cannot understand the work from the photo, retake it before leaving.</h2>
+        <p>One clear retake on site is faster than a return trip, a phone call, or an unclear closeout package.</p>
+      </div>
+      <div class="pass">Wide<br>Medium<br>Close-up</div>
+    </section>
+
+    <footer>
+      Internal field handout. QR destination is configured in <strong>qr-config.json</strong>; replace the URL before printing final copies.
+    </footer>
+  </main>
+</body>
+</html>

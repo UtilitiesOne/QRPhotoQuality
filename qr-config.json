@@ -1,0 +1,4 @@
+{
+  "helper_url": "https://utilitiesone.github.io/QRPhotoQuality/",
+  "note": "Run python make_assets.py after changing helper_url."
+}
